@@ -27,7 +27,6 @@ defmodule ListLastPerfExperiment do
   def list_last8([last]), do: last
   def list_last8([_ | rest]), do: list_last8(rest)
 
-
   @doc """
   Implementation tagged with with `@compile {:inline, [list_last_inline: 1]}`.
   """
@@ -35,6 +34,27 @@ defmodule ListLastPerfExperiment do
   def list_last_inline([]), do: nil
   def list_last_inline([head]), do: head
   def list_last_inline([_ | tail]), do: list_last_inline(tail)
+
+  @doc """
+  Invoking erlang's :lists.last/1
+  """
+  def list_last_erlang([]), do: nil
+  def list_last_erlang(list), do: :lists.last(list)
+
+  @doc """
+  Invoking erlang's :lists.last/1, inlined
+  """
+  @compile {:inline, [list_last_erlang_inline: 1]}
+  def list_last_erlang_inline([]), do: nil
+  def list_last_erlang_inline(list), do: :lists.last(list)
+
+  @doc """
+  Implementation based on erlang's :lists.last/1, inlined
+  """
+  @compile {:inline, [list_last_erlang_like_inline: 1]}
+  def list_last_erlang_like_inline(list), do: list_last_erlang_like_inline(nil, list)
+  defp list_last_erlang_like_inline(elem, []), do: elem
+  defp list_last_erlang_like_inline(_, [h | t]), do: list_last_erlang_like_inline(h, t)
 
   @doc """
   A List.last implementation that uses Enum.reverse followed by hd.
@@ -48,20 +68,23 @@ defmodule ListLastPerfExperiment do
         "enum_reverse_hd" => &enum_reverse_hd/1,
         "list_last_orig" => &list_last_orig/1,
         "list_last8" => &list_last8/1,
-        "list_last_inline" => &list_last_inline/1
+        "list_last_inline" => &list_last_inline/1,
+        "erlang_last" => &list_last_erlang/1,
+        "erlang_last_inline" => &list_last_erlang_inline/1,
+        "erlang_like_last_inline" => &list_last_erlang_like_inline/1
       },
       inputs: %{
         "empty" => [],
-        "one" => [1],
+        # "one" => [1],
         "five" => Enum.to_list(1..5),
-        "eight" => Enum.to_list(1..8),
+        # "eight" => Enum.to_list(1..8),
         "1h" => Enum.to_list(1..100),
-        "1k" => Enum.to_list(1..1_000),
-        "10k" => Enum.to_list(1..10_000),
-        "100k" => Enum.to_list(1..100_000)
+        # "1k" => Enum.to_list(1..1_000),
+        "10k" => Enum.to_list(1..10_000)
+        # "100k" => Enum.to_list(1..100_000)
       },
-      time: 10,
-      memory_time: 2
+      time: 1,
+      warmup: 1
     )
 
     :ok

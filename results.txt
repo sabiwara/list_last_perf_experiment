@@ -1,0 +1,120 @@
+Compiling 1 file (.ex)
+Operating System: Linux
+CPU Information: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz
+Number of Available Cores: 8
+Available memory: 15.41 GB
+Elixir 1.11.0-rc.0
+Erlang 23.0.4
+
+Benchmark suite executing with the following configuration:
+warmup: 1 s
+time: 1 s
+memory time: 0 ns
+parallel: 1
+inputs: 10k, 1h, empty, five
+Estimated total run time: 56 s
+
+Benchmarking enum_reverse_hd with input 10k...
+Benchmarking enum_reverse_hd with input 1h...
+Benchmarking enum_reverse_hd with input empty...
+Benchmarking enum_reverse_hd with input five...
+Benchmarking erlang_last with input 10k...
+Benchmarking erlang_last with input 1h...
+Benchmarking erlang_last with input empty...
+Benchmarking erlang_last with input five...
+Benchmarking erlang_last_inline with input 10k...
+Benchmarking erlang_last_inline with input 1h...
+Benchmarking erlang_last_inline with input empty...
+Benchmarking erlang_last_inline with input five...
+Benchmarking erlang_like_last_inline with input 10k...
+Benchmarking erlang_like_last_inline with input 1h...
+Benchmarking erlang_like_last_inline with input empty...
+Benchmarking erlang_like_last_inline with input five...
+Benchmarking list_last8 with input 10k...
+Benchmarking list_last8 with input 1h...
+Benchmarking list_last8 with input empty...
+Benchmarking list_last8 with input five...
+Benchmarking list_last_inline with input 10k...
+Benchmarking list_last_inline with input 1h...
+Benchmarking list_last_inline with input empty...
+Benchmarking list_last_inline with input five...
+Benchmarking list_last_orig with input 10k...
+Benchmarking list_last_orig with input 1h...
+Benchmarking list_last_orig with input empty...
+Benchmarking list_last_orig with input five...
+
+##### With input 10k #####
+Name                              ips        average  deviation         median         99th %
+erlang_last                   37.19 K       26.89 μs    ±15.68%       26.04 μs       47.47 μs
+erlang_like_last_inline       36.97 K       27.05 μs    ±16.73%       25.89 μs       50.03 μs
+erlang_last_inline            34.53 K       28.96 μs    ±17.65%       26.51 μs       46.77 μs
+list_last_inline              33.30 K       30.03 μs    ±17.05%       28.71 μs       54.51 μs
+list_last8                    32.31 K       30.95 μs    ±22.18%       29.00 μs       70.36 μs
+enum_reverse_hd               28.03 K       35.68 μs    ±69.55%       18.73 μs      102.17 μs
+list_last_orig                21.38 K       46.77 μs    ±11.77%       45.38 μs       74.31 μs
+
+Comparison: 
+erlang_last                   37.19 K
+erlang_like_last_inline       36.97 K - 1.01x slower +0.157 μs
+erlang_last_inline            34.53 K - 1.08x slower +2.07 μs
+list_last_inline              33.30 K - 1.12x slower +3.14 μs
+list_last8                    32.31 K - 1.15x slower +4.06 μs
+enum_reverse_hd               28.03 K - 1.33x slower +8.79 μs
+list_last_orig                21.38 K - 1.74x slower +19.88 μs
+
+##### With input 1h #####
+Name                              ips        average  deviation         median         99th %
+erlang_like_last_inline        3.46 M      289.22 ns  ±1074.06%         273 ns         468 ns
+erlang_last                    3.42 M      292.44 ns   ±891.00%         277 ns         525 ns
+erlang_last_inline             3.23 M      309.31 ns  ±1013.84%         283 ns         568 ns
+enum_reverse_hd                3.15 M      317.04 ns  ±6058.26%         168 ns         568 ns
+list_last8                     3.15 M      317.20 ns   ±977.72%         297 ns         472 ns
+list_last_inline               2.95 M      338.60 ns   ±120.95%         304 ns        1080 ns
+list_last_orig                 2.03 M      493.35 ns   ±684.69%         471 ns         751 ns
+
+Comparison: 
+erlang_like_last_inline        3.46 M
+erlang_last                    3.42 M - 1.01x slower +3.21 ns
+erlang_last_inline             3.23 M - 1.07x slower +20.09 ns
+enum_reverse_hd                3.15 M - 1.10x slower +27.81 ns
+list_last8                     3.15 M - 1.10x slower +27.98 ns
+list_last_inline               2.95 M - 1.17x slower +49.37 ns
+list_last_orig                 2.03 M - 1.71x slower +204.13 ns
+
+##### With input empty #####
+Name                              ips        average  deviation         median         99th %
+erlang_last_inline            54.48 M       18.36 ns   ±769.63%          14 ns          66 ns
+enum_reverse_hd               54.26 M       18.43 ns   ±684.13%          12 ns          82 ns
+list_last_orig                53.99 M       18.52 ns   ±780.47%          14 ns          68 ns
+list_last_inline              53.13 M       18.82 ns   ±965.90%          14 ns          78 ns
+erlang_last                   49.17 M       20.34 ns   ±760.46%          13 ns          95 ns
+list_last8                    41.65 M       24.01 ns   ±579.55%          17 ns          95 ns
+erlang_like_last_inline       33.50 M       29.85 ns   ±750.94%          21 ns         118 ns
+
+Comparison: 
+erlang_last_inline            54.48 M
+enum_reverse_hd               54.26 M - 1.00x slower +0.0724 ns
+list_last_orig                53.99 M - 1.01x slower +0.167 ns
+list_last_inline              53.13 M - 1.03x slower +0.47 ns
+erlang_last                   49.17 M - 1.11x slower +1.98 ns
+list_last8                    41.65 M - 1.31x slower +5.65 ns
+erlang_like_last_inline       33.50 M - 1.63x slower +11.49 ns
+
+##### With input five #####
+Name                              ips        average  deviation         median         99th %
+list_last_inline              30.62 M       32.66 ns   ±675.14%          27 ns          96 ns
+list_last_orig                25.73 M       38.87 ns   ±461.93%          34 ns          89 ns
+erlang_last_inline            23.55 M       42.46 ns   ±511.10%          35 ns         180 ns
+erlang_last                   22.53 M       44.39 ns   ±390.65%          35 ns         159 ns
+erlang_like_last_inline       19.90 M       50.26 ns   ±384.27%          38 ns         224 ns
+list_last8                    18.47 M       54.14 ns   ±407.43%          52 ns         128 ns
+enum_reverse_hd               10.70 M       93.44 ns ±12714.88%          38 ns         150 ns
+
+Comparison: 
+list_last_inline              30.62 M
+list_last_orig                25.73 M - 1.19x slower +6.20 ns
+erlang_last_inline            23.55 M - 1.30x slower +9.80 ns
+erlang_last                   22.53 M - 1.36x slower +11.73 ns
+erlang_like_last_inline       19.90 M - 1.54x slower +17.60 ns
+list_last8                    18.47 M - 1.66x slower +21.47 ns
+enum_reverse_hd               10.70 M - 2.86x slower +60.78 ns
